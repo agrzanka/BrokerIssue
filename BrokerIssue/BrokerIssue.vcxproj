@@ -93,6 +93,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,6 +126,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Broker.cpp" />
+    <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Supplier.cpp" />
+    <ClCompile Include="TransportInput.cpp" />
+    <ClCompile Include="TransportOutput.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Broker.h" />
+    <ClInclude Include="Customer.h" />
+    <ClInclude Include="MyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Supplier.h" />
+    <ClInclude Include="TransportInput.h" />
+    <ClInclude Include="TransportOutput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
