@@ -133,20 +133,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="adjacencyMatrixObject.cpp" />
     <ClCompile Include="Broker.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Supplier.cpp" />
+    <ClCompile Include="Transport.cpp" />
     <ClCompile Include="TransportInput.cpp" />
     <ClCompile Include="TransportOutput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="adjacencyMatrixObject.h" />
     <ClInclude Include="Broker.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Supplier.h" />
+    <ClInclude Include="Transport.h" />
     <ClInclude Include="TransportInput.h" />
     <ClInclude Include="TransportOutput.h" />
   </ItemGroup>
