@@ -3,14 +3,14 @@
 #include "adjacencyMatrixObject.h"
 #include "Customer.h"
 #include"Supplier.h"
-#include"TransportOutput.h"
+//#include"TransportOutput.h"
 #include "Transport.h"
 
-class TransportInput:public Transport {
+class TransportInput {
 public:
-	//std::vector<Supplier> suppliers;
-	//std::vector<Customer> customers;
-	//std::vector<std::vector<adjacencyMatrixObject>> adjacencyMatrix;
+	std::vector<Supplier> suppliers;
+	std::vector<Customer> customers;
+	std::vector<std::vector<adjacencyMatrixObject>> adjacencyMatrix;
 
 	TransportInput();
 	TransportInput(std::vector<Supplier>sups, std::vector<Customer>custs, std::vector<int>dem, std::vector<int>supply,
@@ -18,7 +18,7 @@ public:
 	void calculateFinalCosts();
 	void calculateTransportUnits();
 
-	TransportOutput calculateTransport();
+	//TransportOutput calculateTransport();
 
 	std::vector<int> demand;
 	std::vector<int> supply;
