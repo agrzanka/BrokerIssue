@@ -13,6 +13,7 @@ namespace BrokerIssue {
 
 
 	Broker broker;
+	TransportInput tIn;
 
 	/// <summary>
 	/// Podsumowanie informacji o MyForm
@@ -165,6 +166,27 @@ namespace BrokerIssue {
 		broker.alphaCoefs = { 16,15,14 };
 		textBox4->Text = ((broker.alphaCoefs[0]).ToString());
 		//while -> textbox.append(--||--)
+		//std::vector<std::vector<adjacencyMatrixObject>> adjMatrix(3);
+		//for (int i = 0; i < 3; i++)
+		//	adjMatrix[i].resize(4);
+		std::vector<std::vector<adjacencyMatrixObject>>adjMatrix{ {adjacencyMatrixObject(8,0), adjacencyMatrixObject(14,0),
+			adjacencyMatrixObject(17,0), adjacencyMatrixObject(0,0)}, { adjacencyMatrixObject(12,0), adjacencyMatrixObject(9,0),
+			adjacencyMatrixObject(19,0), adjacencyMatrixObject(0,0)},{adjacencyMatrixObject(0,0), adjacencyMatrixObject(0,0),
+			adjacencyMatrixObject(0,0), adjacencyMatrixObject(0,0)} };
+
+		tIn.adjacencyMatrix = adjMatrix;
+		tIn.costOfPurchase = { 10,12 };
+		tIn.costOfVending = { 30,25,30 };
+		tIn.demand = { 10, 28, 27 };
+		tIn.supply = { 20,30 };
+		tIn.suppliers = { Supplier(), Supplier() };
+		tIn.customers = { Customer(), Customer(), Customer() };
+
+		tIn.calculateFinalCosts();
+
+		tIn.calculateTransportUnits();
+
+		textBox1->Text=("done");
 	}
 };
 }
