@@ -14,7 +14,6 @@ namespace BrokerIssue {
 
 	Broker broker;
 	TransportInput tIn;
-	TransportInput tIn2;
 
 	/// <summary>
 	/// Podsumowanie informacji o MyForm
@@ -166,10 +165,7 @@ namespace BrokerIssue {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		broker.alphaCoefs = { 16,15,14 };
 		textBox4->Text = ((broker.alphaCoefs[0]).ToString());
-		//while -> textbox.append(--||--)
-		//std::vector<std::vector<adjacencyMatrixObject>> adjMatrix(3);
-		//for (int i = 0; i < 3; i++)
-		//	adjMatrix[i].resize(4);
+		
 		std::vector<std::vector<adjacencyMatrixObject>>adjMatrix{ {adjacencyMatrixObject(8,0), adjacencyMatrixObject(14,0),
 			adjacencyMatrixObject(17,0), adjacencyMatrixObject(0,0)}, { adjacencyMatrixObject(12,0), adjacencyMatrixObject(9,0),
 			adjacencyMatrixObject(19,0), adjacencyMatrixObject(0,0)},{adjacencyMatrixObject(0,0), adjacencyMatrixObject(0,0),
@@ -193,9 +189,15 @@ namespace BrokerIssue {
 		//trzeba utworzyæ rzeczy do drugiego Transport Inputu, ¿eby sprawdziæ, czy konstruktor dobrze dzia³a
 		std::vector<Supplier>suppliers = { Supplier(), Supplier() };
 		std::vector<Customer>customers = { Customer(), Customer(), Customer() };
+		std::vector<int> supply = { 20,30 };
+		std::vector<int>demand = { 10,28,27 };
+		std::vector<int> costOP = { 10,12 };
+		std::vector<int>costOV = { 30,25,30 };
+		std::vector<std::vector<int>>costOfTransport = { {8, 14,17}, {12,9,19} };
 
-		//tIn2 = new TransportInput(suppliers,customers,);
-
+		TransportInput tin(suppliers, customers, demand, supply, costOP, costOV, costOfTransport);
+		tin.calculateFinalCosts();
+		tin.calculateTransportUnits();
 		tIn.calculateFinalCosts();
 
 		tIn.calculateTransportUnits();

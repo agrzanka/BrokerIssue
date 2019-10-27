@@ -16,8 +16,11 @@ public:
 	std::vector<int>alphaCoefs;
 	std::vector<int>betaCoefs;
 
+	TransportInput tIN;
+
 	Broker();
 	Broker(TransportInput);
+
 
 	void iterate();
 

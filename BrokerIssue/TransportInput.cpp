@@ -28,18 +28,16 @@ TransportInput::TransportInput(std::vector<Supplier> sups, std::vector<Customer>
 	this->adjacencyMatrix.resize(this->suppliers.size() + 1);
 	for (int j = 0; j < this->adjacencyMatrix.size() - 1; j++)
 	{
-		for (int i = 0; i < this->suppliers.size(); i++)
+		for (int i = 0; i < this->customers.size(); i++)
 		{
 			this->adjacencyMatrix[j].push_back(adjacencyMatrixObject(costOfTransport[j][i], 0));
 		}
 		this->adjacencyMatrix[j].push_back(adjacencyMatrixObject(0, 0));
 	}
-	for (int i = 0; i < this->suppliers.size()+1; i++)
+	for (int i = 0; i < this->customers.size()+1; i++)
 	{
 		this->adjacencyMatrix[suppliers.size()].push_back(adjacencyMatrixObject(0, 0));
 	}
-
-		
 
 }
 
