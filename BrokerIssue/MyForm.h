@@ -14,6 +14,7 @@ namespace BrokerIssue {
 
 	Broker broker;
 	TransportInput tIn;
+	TransportInput tIn2;
 
 	/// <summary>
 	/// Podsumowanie informacji o MyForm
@@ -180,12 +181,20 @@ namespace BrokerIssue {
 		tIn.demand = { 10, 28, 27 };
 		tIn.supply = { 20,30 };
 
+		
+
 		//push backi - dodaæ do konstruktora koniecznie!!!
 		tIn.demand.push_back(20+30);
 		tIn.supply.push_back(10 + 28 + 27);
 
 		tIn.suppliers = { Supplier(), Supplier() };
 		tIn.customers = { Customer(), Customer(), Customer() };
+
+		//trzeba utworzyæ rzeczy do drugiego Transport Inputu, ¿eby sprawdziæ, czy konstruktor dobrze dzia³a
+		std::vector<Supplier>suppliers = { Supplier(), Supplier() };
+		std::vector<Customer>customers = { Customer(), Customer(), Customer() };
+
+		//tIn2 = new TransportInput(suppliers,customers,);
 
 		tIn.calculateFinalCosts();
 

@@ -4,8 +4,43 @@ TransportInput::TransportInput()
 {
 }
 
-TransportInput::TransportInput(std::vector<Supplier> sups, std::vector<Customer> custs, std::vector<int> dem, std::vector<int> supply, std::vector<int> costOP, std::vector<int> costOV, std::vector<std::vector<int>> costOfTransport)
+TransportInput::TransportInput(std::vector<Supplier> sups, std::vector<Customer> custs, std::vector<int> dem, 
+	std::vector<int> supply, std::vector<int> costOP, std::vector<int> costOV, std::vector<std::vector<int>> costOfTransport)
 {
+	this->suppliers = sups;
+	this->customers = custs;
+	this->demand = dem;
+	this->supply = supply;
+	this->costOfPurchase = costOP;
+	this->costOfVending = costOV;
+	
+	int totalDemand=0;
+	for (auto&d : this->demand)
+		totalDemand += d;
+
+	int totalSupply = 0;
+	for (auto&s : this->supply)
+		totalSupply += s;
+
+	this->demand.push_back(totalSupply);
+	this->supply.push_back(totalDemand);
+
+	this->adjacencyMatrix.resize(this->suppliers.size() + 1);
+	for (int j = 0; j < this->adjacencyMatrix.size() - 1; j++)
+	{
+		for (int i = 0; i < this->suppliers.size(); i++)
+		{
+			this->adjacencyMatrix[j].push_back(adjacencyMatrixObject(costOfTransport[j][i], 0));
+		}
+		this->adjacencyMatrix[j].push_back(adjacencyMatrixObject(0, 0));
+	}
+	for (int i = 0; i < this->suppliers.size()+1; i++)
+	{
+		this->adjacencyMatrix[suppliers.size()].push_back(adjacencyMatrixObject(0, 0));
+	}
+
+		
+
 }
 
 void TransportInput::calculateFinalCosts()
