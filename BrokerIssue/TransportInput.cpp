@@ -22,8 +22,66 @@ void TransportInput::calculateFinalCosts()
 
 void TransportInput::calculateTransportUnits()
 {
+
+	int k = 0; //suppliers' iterator
+	int l = 0; //customers' iterator
+	int iter = 0; //iterators' iterator XDDDDDD
+	int visited = 0; //visited data in matrix
+	int max; //maximal iteraor
+
+	while (visited < (this->suppliers.size()+1)*(this->customers.size()+1)+1)
+	{
+		
+		iter > this->customers.size()+1 ? max = this->customers.size() : max = iter;
+		int i = l;
+
+		for (int j = k; j < max + 1; j++)
+		{
+			i--;
+			visited++;
+		}
+
+		if (l < this->customers.size())
+			l++;
+		else
+			k++;
+
+		iter++;
+	}
+
+	int dddjfkgkhjvjgxd = visited;
 	//North-West
-	int i;
+
+	/*int sup = 0, cust = 0;
+	int maxTimes = 0;
+	int remain = int(suppliers.size()*customers.size());
+
+	while (remain>0)
+	{
+		for (int i = sup; i > -1; i--)
+		{
+			if (cust + maxTimes<int(customers.size()))
+			{
+				unitCalc(i, cust+maxTimes);
+				cust++;
+				remain--;
+			}
+
+			if (sup < suppliers.size())
+				sup++;
+			else
+				maxTimes++;
+
+			cust = 0;
+		}
+
+		for (int i = 0; i<int(customers.size()); i++)
+			unitCalc(int(suppliers.size()), i);
+		for (int j = 0; j<int(suppliers.size()); j++)
+			unitCalc(j, int(customers.size()));*/
+
+
+	/*int i;
 	this->suppliers.size() < this->customers.size() ? i = this->suppliers.size() : i = this->customers.size();
 	int past = 0;
 	int current = 0;
@@ -62,6 +120,12 @@ void TransportInput::calculateTransportUnits()
 			this->supply[current] -= u;
 		}
 
-		past = current;
-	}
+		past = current;*/
+	
+}
+
+void TransportInput::unitCalc(int s, int c)
+{
+
+
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 #include "adjacencyMatrixObject.h"
 #include "Customer.h"
 #include"Supplier.h"
@@ -18,6 +19,7 @@ public:
 		std::vector<int>costOP, std::vector<int>costOV, std::vector<std::vector<int>>costOfTransport);
 	void calculateFinalCosts();
 	void calculateTransportUnits();
+	void unitCalc(int s, int c);
 
 	//TransportOutput calculateTransport();
 
