@@ -29,24 +29,38 @@ void TransportInput::calculateTransportUnits()
 	int visited = 0; //visited data in matrix
 	int max; //maximal iteraor
 
-	while (visited < (this->suppliers.size()+1)*(this->customers.size()+1)+1)
+	while (visited < (this->suppliers.size()*this->customers.size()))
 	{
 		
-		iter > this->customers.size()+1 ? max = this->customers.size() : max = iter;
+		iter > (this->customers.size()) ? max = (this->customers.size()) : max = iter;
 		int i = l;
 
-		for (int j = k; j < max + 1; j++)
+		for (int j = k; j < max ; j++)
 		{
+			//calculate();
 			i--;
 			visited++;
 		}
 
-		if (l < this->customers.size())
+		if (l < this->customers.size()-1)
 			l++;
 		else
 			k++;
 
 		iter++;
+	}
+	int erg2r = visited;
+	int c = this->customers.size();
+	int s = this->suppliers.size();
+	for (int i = 0; i < this->customers.size(); i++)
+	{
+		//calculate();
+		visited++;
+	}
+	for (int j = 0; j < this->suppliers.size() + 1; j++)
+	{
+		//calculate();
+		visited++;
 	}
 
 	int dddjfkgkhjvjgxd = visited;
