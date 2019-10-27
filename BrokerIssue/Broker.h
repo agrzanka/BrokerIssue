@@ -16,7 +16,8 @@ public:
 	std::vector<int>alphaCoefs;
 	std::vector<int>betaCoefs;
 
-	TransportInput tIN;
+	TransportOutput transport;
+	//od uøytkownika weümie dane do zrobienia transportInput, z tego przejdzie do Transport Output i wtedy przypiszemy output do brokera
 
 	Broker();
 	Broker(TransportInput);

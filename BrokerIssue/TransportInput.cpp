@@ -4,15 +4,22 @@ TransportInput::TransportInput()
 {
 }
 
-TransportInput::TransportInput(std::vector<Supplier> sups, std::vector<Customer> custs, std::vector<int> dem, 
-	std::vector<int> supply, std::vector<int> costOP, std::vector<int> costOV, std::vector<std::vector<int>> costOfTransport)
+TransportInput::TransportInput(std::vector<Supplier> sups, std::vector<Customer> custs, std::vector<std::vector<int>> costOfTransport)
 {
 	this->suppliers = sups;
 	this->customers = custs;
-	this->demand = dem;
-	this->supply = supply;
-	this->costOfPurchase = costOP;
-	this->costOfVending = costOV;
+	//this->demand = dem;
+	//this->supply = supply;
+	//this->costOfPurchase = costOP;
+	//this->costOfVending = costOV;
+	for (int d = 0; d < this->customers.size(); d++)
+		this->demand.push_back(this->customers[d].demand);
+	for (int s = 0; s < this->suppliers.size(); s++)
+		this->supply.push_back(this->suppliers[s].supply);
+	for (int p = 0; p < this->suppliers.size(); p++)
+		this->costOfPurchase.push_back(this->suppliers[p].costOfPurchase);
+	for (int v = 0; v < this->customers.size(); v++)
+		this->costOfVending.push_back(this->customers[v].costOfVending);
 	
 	int totalDemand=0;
 	for (auto&d : this->demand)

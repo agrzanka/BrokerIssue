@@ -13,8 +13,7 @@ namespace BrokerIssue {
 
 
 	Broker broker;
-	TransportInput tIn;
-
+	TransportInput t;
 	/// <summary>
 	/// Podsumowanie informacji o MyForm
 	/// </summary>
@@ -166,41 +165,17 @@ namespace BrokerIssue {
 		broker.alphaCoefs = { 16,15,14 };
 		textBox4->Text = ((broker.alphaCoefs[0]).ToString());
 		
-		std::vector<std::vector<adjacencyMatrixObject>>adjMatrix{ {adjacencyMatrixObject(8,0), adjacencyMatrixObject(14,0),
-			adjacencyMatrixObject(17,0), adjacencyMatrixObject(0,0)}, { adjacencyMatrixObject(12,0), adjacencyMatrixObject(9,0),
-			adjacencyMatrixObject(19,0), adjacencyMatrixObject(0,0)},{adjacencyMatrixObject(0,0), adjacencyMatrixObject(0,0),
-			adjacencyMatrixObject(0,0), adjacencyMatrixObject(0,0)} };
-
-		tIn.adjacencyMatrix = adjMatrix;
-		tIn.costOfPurchase = { 10,12 };
-		tIn.costOfVending = { 30,25,30 };
-		tIn.demand = { 10, 28, 27 };
-		tIn.supply = { 20,30 };
-
 		
-
-		//push backi - dodaæ do konstruktora koniecznie!!!
-		tIn.demand.push_back(20+30);
-		tIn.supply.push_back(10 + 28 + 27);
-
-		tIn.suppliers = { Supplier(), Supplier() };
-		tIn.customers = { Customer(), Customer(), Customer() };
-
-		//trzeba utworzyæ rzeczy do drugiego Transport Inputu, ¿eby sprawdziæ, czy konstruktor dobrze dzia³a
-		std::vector<Supplier>suppliers = { Supplier(), Supplier() };
-		std::vector<Customer>customers = { Customer(), Customer(), Customer() };
-		std::vector<int> supply = { 20,30 };
-		std::vector<int>demand = { 10,28,27 };
-		std::vector<int> costOP = { 10,12 };
-		std::vector<int>costOV = { 30,25,30 };
+		std::vector<Supplier>suppliers = { Supplier(20,10), Supplier(30,12) };
+		std::vector<Customer>customers = { Customer(10,30), Customer(28,25), Customer(27,30) };
 		std::vector<std::vector<int>>costOfTransport = { {8, 14,17}, {12,9,19} };
 
-		TransportInput tin(suppliers, customers, demand, supply, costOP, costOV, costOfTransport);
-		tin.calculateFinalCosts();
-		tin.calculateTransportUnits();
-		tIn.calculateFinalCosts();
-
-		tIn.calculateTransportUnits();
+		TransportInput tin(suppliers, customers, costOfTransport);
+		t = tin;
+		t.calculateFinalCosts();
+		t.calculateTransportUnits();
+		textBox2->Text=((t.customers.size()).ToString());
+		
 
 		textBox1->Text=("done");
 	}

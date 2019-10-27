@@ -6,8 +6,8 @@ class TransportOutput {
 
 public:
 	
-	std::vector<Supplier> suppliers;
-	std::vector<Customer> customers;
+	std::vector<Supplier> suppliers = {};
+	std::vector<Customer> customers = {};
 	std::vector<std::vector<adjacencyMatrixObject>> adjacencyMatrix; 
 	
 	TransportOutput();
