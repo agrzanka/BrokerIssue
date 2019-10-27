@@ -179,6 +179,11 @@ namespace BrokerIssue {
 		tIn.costOfVending = { 30,25,30 };
 		tIn.demand = { 10, 28, 27 };
 		tIn.supply = { 20,30 };
+
+		//push backi - dodaæ do konstruktora koniecznie!!!
+		tIn.demand.push_back(20+30);
+		tIn.supply.push_back(10 + 28 + 27);
+
 		tIn.suppliers = { Supplier(), Supplier() };
 		tIn.customers = { Customer(), Customer(), Customer() };
 

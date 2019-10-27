@@ -29,20 +29,22 @@ void TransportInput::calculateTransportUnits()
 	int visited = 0; //visited data in matrix
 	int max; //maximal iteraor
 
+	//North-West
+
 	while (visited < (this->suppliers.size()*this->customers.size()))
 	{
 		
-		iter > (this->customers.size()) ? max = (this->customers.size()) : max = iter;
+		iter > (this->suppliers.size()-1) ? max = (this->suppliers.size()-1) : max = iter;
 		int i = l;
 
-		for (int j = k; j < max ; j++)
+		for (int j = k; j < max+1 ; j++)
 		{
-			//calculate();
+			unitCalc(j, i);
 			i--;
 			visited++;
 		}
 
-		if (l < this->customers.size()-1)
+		if (l < this->suppliers.size())
 			l++;
 		else
 			k++;
@@ -54,17 +56,18 @@ void TransportInput::calculateTransportUnits()
 	int s = this->suppliers.size();
 	for (int i = 0; i < this->customers.size(); i++)
 	{
-		//calculate();
+		unitCalc(this->suppliers.size(), i);
 		visited++;
 	}
 	for (int j = 0; j < this->suppliers.size() + 1; j++)
 	{
-		//calculate();
+		unitCalc(j, this->customers.size());
 		visited++;
 	}
 
 	int dddjfkgkhjvjgxd = visited;
-	//North-West
+	int kkjflh = 0;
+	
 
 	/*int sup = 0, cust = 0;
 	int maxTimes = 0;
@@ -140,6 +143,9 @@ void TransportInput::calculateTransportUnits()
 
 void TransportInput::unitCalc(int s, int c)
 {
-
-
+	int unit;
+	this->demand[c] < this->supply[s] ? unit=this->demand[c] : unit=this->supply[s];
+	this->demand[c] -= unit;
+	this->supply[s] -= unit;
+	this->adjacencyMatrix[s][c].setUnits(unit);
 }
