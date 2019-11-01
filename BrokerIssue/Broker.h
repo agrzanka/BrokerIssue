@@ -13,8 +13,8 @@ class Broker {
 
 public:
 	std::vector<std::vector<int>>indicatorsTable;
-	std::vector<std::pair<int, bool>>alphaCoefs;
-	std::vector<std::pair<int, bool>>betaCoefs;
+	std::vector<int>alphaCoefs;
+	std::vector<int>betaCoefs;
 	int income;
 
 	TransportOutput transport;

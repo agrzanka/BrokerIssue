@@ -162,8 +162,6 @@ namespace BrokerIssue {
 
 			 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-		//broker.alphaCoefs = { 16,15,14 };
-		//textBox4->Text = ((broker.alphaCoefs[0]).ToString());
 		
 		
 		std::vector<Supplier>suppliers = { Supplier(20,10), Supplier(30,12) };
