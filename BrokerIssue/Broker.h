@@ -15,12 +15,13 @@ public:
 	std::vector<std::vector<int>>indicatorsTable;
 	std::vector<int>alphaCoefs;
 	std::vector<int>betaCoefs;
+	int income;
 
 	TransportOutput transport;
 	//od uøytkownika weümie dane do zrobienia transportInput, z tego przejdzie do Transport Output i wtedy przypiszemy output do brokera
 
 	Broker();
-	Broker(TransportInput);
+	Broker(TransportInput input);
 
 
 	void iterate();
@@ -30,4 +31,6 @@ public:
 															3 4 5  
 															6 7 8			etc. */
 	void calculateCoeficients();
+
+	void cycle(int minus);
 };

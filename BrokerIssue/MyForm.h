@@ -174,6 +174,8 @@ namespace BrokerIssue {
 		t = tin;
 		t.calculateFinalCosts();
 		t.calculateTransportUnits();
+		TransportOutput output(t);
+		int income= output.calculateTotalIncome();
 		textBox2->Text=((t.customers.size()).ToString());
 		
 

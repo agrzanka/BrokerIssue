@@ -13,6 +13,6 @@ public:
 	TransportOutput();
 	TransportOutput(TransportInput input);
 
-	int calculateTotalCost();
+	int calculateTotalIncome();
 
 };
