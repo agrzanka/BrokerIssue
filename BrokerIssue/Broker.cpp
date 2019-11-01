@@ -8,6 +8,13 @@ Broker::Broker(TransportInput input)
 {
 	this->transport = TransportOutput(input);
 	this->income = this->transport.calculateTotalIncome();
+
+	this->alphaCoefs.resize(this->transport.adjacencyMatrix.size());
+	this->betaCoefs.resize(this->transport.adjacencyMatrix[0].size());
+
+	this->indicatorsTable.resize(this->transport.adjacencyMatrix.size());
+	for (int i = 0; i<int(indicatorsTable.size()); i++)
+		this->indicatorsTable[i].resize(this->transport.adjacencyMatrix[0].size());
 }
 
 void Broker::iterate()
@@ -23,13 +30,21 @@ void Broker::iterate()
 
 int Broker::calculateIndicatorsTable()
 {
+	for (int i =0; i<int(indicatorsTable.size()); i++)
+		for (int j = 0; j < int(indicatorsTable[0].size()); j++)
+			indicatorsTable[i][j] = 0;
+
+	for (int i = 0; i<int(this->transport.adjacencyMatrix.size()); i++)
+		for (int j = 0; j<int(this->transport.adjacencyMatrix[0].size()); j++)
+			if (this->transport.adjacencyMatrix[i][j].getUnits() == 0)
+				indicatorsTable[i][j] = this->transport.adjacencyMatrix[i][j].getCost() - alphaCoefs[i] - betaCoefs[j];
+
+
 	return 0;
 }
 
 void Broker::calculateCoeficients()
 {
-	this->alphaCoefs.resize(this->transport.adjacencyMatrix.size());
-	this->betaCoefs.resize(this->transport.adjacencyMatrix[0].size());
 	for (auto&a : this->alphaCoefs)
 		a = -9999;
 	this->alphaCoefs[0] = 0;

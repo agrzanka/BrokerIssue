@@ -178,6 +178,7 @@ namespace BrokerIssue {
 		
 		Broker brrrrroker(t);
 		brrrrroker.calculateCoeficients();
+		int ind = brrrrroker.calculateIndicatorsTable();
 
 		textBox1->Text=("done");
 	}
