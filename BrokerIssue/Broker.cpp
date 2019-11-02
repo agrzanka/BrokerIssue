@@ -6,6 +6,8 @@ Broker::Broker()
 
 Broker::Broker(TransportInput input)
 {
+	input.calculateFinalCosts();
+	input.calculateTransportUnits();
 	this->transport = TransportOutput(input);
 	this->income = this->transport.calculateTotalIncome();
 
@@ -17,15 +19,23 @@ Broker::Broker(TransportInput input)
 		this->indicatorsTable[i].resize(this->transport.adjacencyMatrix[0].size());
 }
 
-void Broker::iterate()
+void Broker::iterate(std::vector<int>index)
 {
-	//std::vector<int> minus = calculateIndicatorsTable();
-	//if (minus.size()==0)
-	//	return;
-	//this->cycle(minus);
-	//this->income=this->transport.calculateTotalIncome();
-	//this->iterate();
-	//return;
+	std::vector<int>cycle = this->findCycle(index);
+	int minimum = this->transport.adjacencyMatrix[index[0]][cycle[1]].getUnits();
+	if (this->transport.adjacencyMatrix[cycle[0]][index[1]].getUnits() < minimum)
+		minimum = this->transport.adjacencyMatrix[cycle[0]][index[1]].getUnits();
+
+	int newvalue = this->transport.adjacencyMatrix[index[0]][index[1]].getUnits() + minimum;
+	this->transport.adjacencyMatrix[index[0]][index[1]].setUnits(newvalue);
+	newvalue = this->transport.adjacencyMatrix[cycle[0]][cycle[1]].getUnits() + minimum;
+	this->transport.adjacencyMatrix[cycle[0]][cycle[1]].setUnits(newvalue);
+	newvalue = this->transport.adjacencyMatrix[cycle[0]][index[1]].getUnits() - minimum;
+	this->transport.adjacencyMatrix[cycle[0]][index[1]].setUnits(newvalue);
+	newvalue = this->transport.adjacencyMatrix[index[0]][cycle[1]].getUnits() - minimum;
+	this->transport.adjacencyMatrix[index[0]][cycle[1]].setUnits(newvalue);
+
+	this->calculateCoeficients();
 }
 
 std::vector<int> Broker::calculateIndicatorsTable()

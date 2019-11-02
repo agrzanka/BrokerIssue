@@ -24,7 +24,7 @@ public:
 	Broker(TransportInput input);
 
 
-	void iterate();
+	void iterate(std::vector<int> index);
 
 	std::vector<int> calculateIndicatorsTable();  //if all negatives - returns empty vector, otherwise returns vector of indexes of the highest positive indicator 
 									

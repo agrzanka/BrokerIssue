@@ -12,8 +12,7 @@ namespace BrokerIssue {
 	using namespace System::Drawing;
 
 
-	Broker broker;
-	TransportInput t;
+	
 	/// <summary>
 	/// Podsumowanie informacji o MyForm
 	/// </summary>
@@ -163,25 +162,52 @@ namespace BrokerIssue {
 			 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		
-		
+		//te dane musi pobieraæ od u¿ytkownika z GUI
 		std::vector<Supplier>suppliers = { Supplier(20,10), Supplier(30,12) };
 		std::vector<Customer>customers = { Customer(10,30), Customer(28,25), Customer(27,30) };
 		std::vector<std::vector<int>>costOfTransport = { {8, 14,17}, {12,9,19} };
 
+		//tutaj tworzy z tych pobranych danych input, z którego bêdzie robi³ brokera
 		TransportInput tin(suppliers, customers, costOfTransport);
-		t = tin;
-		t.calculateFinalCosts();
-		t.calculateTransportUnits();
-		TransportOutput output(t);
-		int income= output.calculateTotalIncome();
-		textBox2->Text=((t.customers.size()).ToString());
 		
-		Broker brrrrroker(t);
-		brrrrroker.calculateCoeficients();
-		std::vector<int> ind = brrrrroker.calculateIndicatorsTable();
-		std::vector<int> cycle = brrrrroker.findCycle(ind);
+		//robi brokera (w konstruktorze robi szacher-macher, ¿eby wszystko policzy³o i wgl)
+		Broker broker(tin);
 
-		textBox1->Text=("done");
+		//tu taki jakby initial step:
+		broker.calculateCoeficients();
+		int income = broker.transport.calculateTotalIncome();
+		std::vector<int> ind = broker.calculateIndicatorsTable();
+		
+		/*w tym miejscu musi wypisaæ do pliku:	dane z tabeli: broker.transport.adjacencyMatrix
+												zarobione pinionszki: income
+												alfy i bety: broker.alphaCoefs , broker.betaCoefs
+												dane z tabeli wskaŸników optymalnoœci: broker.indicatorsTable
+												info czy jest to rozwi¹zanie optymalne czy no³p					*/
+		
+
+		//tutaj robi iteracje tak d³ugo, a¿ rozwi¹zanie bêdzie optymalne
+		while (int(ind.size())> 0)
+		{
+			broker.iterate(ind);
+			ind = broker.calculateIndicatorsTable();
+			/* w tym miejscu musi wypisaæ do pliku:	dane z tabeli: broker.transport.adjacencyMatrix
+												alfy i bety: broker.alphaCoefs , broker.betaCoefs
+												dane z tabeli wskaŸników optymalnoœci: broker.indicatorsTable
+												info czy jest to rozwi¹zanie optymalne czy no³p					*/
+		}
+		//jak ju¿ jest optymalne to wpisaæ do pliku, ¿e jest optymalne XDDD
+
+		int finalIncome = broker.transport.calculateTotalIncome();
+		/*i wpisaæ do pliku te¿ finalincome i porównaæ, ¿e na pocz¹tku pinionszków by³o income 
+		a teraz pinionszków jest finalIncome, wiêc jest o tyle wiêcej, czyli super, dzia³a, jesteœmy zajebiœci */
+
+		/* no i na koniec obliczeñ musi pokazywaæ na gui te¿ info o wyniku, czyli to, co w i po ostatniej iteracji
+		zosta³o wpisane do pliku*/
+
+
+
+		//wierzê w Ciebie, dasz sobie radê i wgl jesteœ zwyciêzc¹! :*
+		//XDDDD
 	}
 };
 }
