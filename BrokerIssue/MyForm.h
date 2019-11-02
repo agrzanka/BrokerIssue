@@ -178,7 +178,8 @@ namespace BrokerIssue {
 		
 		Broker brrrrroker(t);
 		brrrrroker.calculateCoeficients();
-		int ind = brrrrroker.calculateIndicatorsTable();
+		std::vector<int> ind = brrrrroker.calculateIndicatorsTable();
+		std::vector<int> cycle = brrrrroker.findCycle(ind);
 
 		textBox1->Text=("done");
 	}

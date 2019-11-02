@@ -19,16 +19,16 @@ Broker::Broker(TransportInput input)
 
 void Broker::iterate()
 {
-	int minus = calculateIndicatorsTable();
-	if (minus == -1)
-		return;
-	this->cycle(minus);
-	this->income=this->transport.calculateTotalIncome();
-	this->iterate();
-	return;
+	//std::vector<int> minus = calculateIndicatorsTable();
+	//if (minus.size()==0)
+	//	return;
+	//this->cycle(minus);
+	//this->income=this->transport.calculateTotalIncome();
+	//this->iterate();
+	//return;
 }
 
-int Broker::calculateIndicatorsTable()
+std::vector<int> Broker::calculateIndicatorsTable()
 {
 	for (int i =0; i<int(indicatorsTable.size()); i++)
 		for (int j = 0; j < int(indicatorsTable[0].size()); j++)
@@ -38,9 +38,18 @@ int Broker::calculateIndicatorsTable()
 		for (int j = 0; j<int(this->transport.adjacencyMatrix[0].size()); j++)
 			if (this->transport.adjacencyMatrix[i][j].getUnits() == 0)
 				indicatorsTable[i][j] = this->transport.adjacencyMatrix[i][j].getCost() - alphaCoefs[i] - betaCoefs[j];
+	std::vector<int> index={};
+	int max = 0;
 
+	for(int i=0;i<int(indicatorsTable.size());i++)
+		for (int j = 0; j<int(indicatorsTable[0].size()); j++)
+			if (indicatorsTable[i][j] > max)
+			{
+				max = indicatorsTable[i][j];
+				index = { i,j };
+			}
 
-	return 0;
+	return index;
 }
 
 void Broker::calculateCoeficients()
@@ -78,6 +87,25 @@ void Broker::calculateCoeficients()
 	}
 }
 
-void Broker::cycle(int minus)
+void Broker::cycle(std::vector<int> index)
 {
+}
+
+std::vector<int> Broker::findCycle(std::vector<int> index)
+{
+	std::vector<int> vertical = {};
+	std::vector<int> horizontal = {};
+
+	for (int i = 0; i<int(this->indicatorsTable.size()); i++)
+		if (this->indicatorsTable[i][index[1]] == 0)
+			vertical.push_back(i);
+	for (int j = 0; j<int(this->indicatorsTable[0].size()); j++)
+		if (this->indicatorsTable[index[0]][j] == 0)
+			horizontal.push_back(j);
+
+	for (auto&i : vertical)
+		for (auto&j : horizontal)
+			if (this->indicatorsTable[i][j] == 0)
+				return { i,j };
+	return std::vector<int>();
 }
